@@ -1,0 +1,399 @@
+{
+  "technologies": [
+    {
+      "name": "Cloudflare",
+      "category": "CDN / WAF",
+      "headers": {
+        "Server": "(?i)^cloudflare$",
+        "CF-Ray": ".+",
+        "CF-Cache-Status": ".+"
+      },
+      "cookies": ["__cf_bm", "cf_clearance", "__cflb"]
+    },
+    {
+      "name": "Amazon CloudFront",
+      "category": "CDN",
+      "headers": {
+        "X-Amz-Cf-Id": ".+",
+        "X-Amz-Cf-Pop": ".+",
+        "Via": "(?i)CloudFront"
+      }
+    },
+    {
+      "name": "AWS ALB / ELB",
+      "category": "Load Balancer",
+      "headers": {
+        "Server": "(?i)^awselb(?:/([\\d.]+))?"
+      },
+      "cookies": ["AWSALB", "AWSALBCORS", "AWSELB"]
+    },
+    {
+      "name": "Akamai",
+      "category": "CDN / WAF",
+      "headers": {
+        "X-Akamai-Transformed": ".+",
+        "Server": "(?i)AkamaiGHost"
+      }
+    },
+    {
+      "name": "Fastly",
+      "category": "CDN",
+      "headers": {
+        "X-Served-By": "(?i)^cache-",
+        "X-Fastly-Request-ID": ".+"
+      }
+    },
+    {
+      "name": "Imperva Incapsula",
+      "category": "WAF",
+      "headers": {
+        "X-CDN": "(?i)Imperva",
+        "X-Iinfo": ".+"
+      },
+      "cookies": ["incap_ses_", "visid_incap_"]
+    },
+    {
+      "name": "Sucuri",
+      "category": "WAF",
+      "headers": {
+        "Server": "(?i)Sucuri/Cloudproxy",
+        "X-Sucuri-ID": ".+"
+      }
+    },
+    {
+      "name": "F5 BIG-IP",
+      "category": "Load Balancer / WAF",
+      "headers": {
+        "Server": "(?i)BigIP"
+      },
+      "cookies": ["BIGipServer", "TS01"]
+    },
+    {
+      "name": "Vercel",
+      "category": "PaaS / CDN",
+      "headers": {
+        "Server": "(?i)^Vercel$",
+        "X-Vercel-Id": ".+"
+      }
+    },
+    {
+      "name": "Netlify",
+      "category": "PaaS / CDN",
+      "headers": {
+        "Server": "(?i)^Netlify$",
+        "X-NF-Request-ID": ".+"
+      }
+    },
+    {
+      "name": "Nginx",
+      "category": "Web Server",
+      "headers": {
+        "Server": "(?i)nginx(?:/([\\d.]+))?"
+      }
+    },
+    {
+      "name": "Apache HTTP Server",
+      "category": "Web Server",
+      "headers": {
+        "Server": "(?i)Apache(?:/([\\d.]+))?"
+      }
+    },
+    {
+      "name": "Microsoft IIS",
+      "category": "Web Server",
+      "headers": {
+        "Server": "(?i)Microsoft-IIS(?:/([\\d.]+))?"
+      }
+    },
+    {
+      "name": "LiteSpeed",
+      "category": "Web Server",
+      "headers": {
+        "Server": "(?i)^LiteSpeed$"
+      }
+    },
+    {
+      "name": "Caddy",
+      "category": "Web Server",
+      "headers": {
+        "Server": "(?i)^Caddy$"
+      }
+    },
+    {
+      "name": "Envoy",
+      "category": "Reverse Proxy",
+      "headers": {
+        "Server": "(?i)^envoy$",
+        "X-Envoy-Upstream-Service-Time": ".+"
+      }
+    },
+    {
+      "name": "OpenResty",
+      "category": "Web Server",
+      "headers": {
+        "Server": "(?i)openresty(?:/([\\d.]+))?"
+      },
+      "implies": ["Nginx"]
+    },
+    {
+      "name": "Apache Tomcat",
+      "category": "Application Server",
+      "headers": {
+        "Server": "(?i)Apache-Coyote(?:/([\\d.]+))?"
+      },
+      "html": ["(?i)<title>Apache Tomcat(?:/([\\d.]+))?"],
+      "implies": ["Java"]
+    },
+    {
+      "name": "PHP",
+      "category": "Programming Language",
+      "headers": {
+        "X-Powered-By": "(?i)PHP(?:/([\\d.]+))?"
+      },
+      "cookies": ["PHPSESSID"]
+    },
+    {
+      "name": "ASP.NET",
+      "category": "Web Framework",
+      "headers": {
+        "X-AspNet-Version": "([\\d.]+)",
+        "X-AspNetMvc-Version": "([\\d.]+)",
+        "X-Powered-By": "(?i)ASP\\.NET"
+      },
+      "cookies": ["ASP.NET_SessionId", ".ASPXAUTH"]
+    },
+    {
+      "name": "Java",
+      "category": "Programming Language",
+      "cookies": ["JSESSIONID"]
+    },
+    {
+      "name": "Express",
+      "category": "Web Framework",
+      "headers": {
+        "X-Powered-By": "(?i)^Express$"
+      },
+      "implies": ["Node.js"]
+    },
+    {
+      "name": "Node.js",
+      "category": "Runtime",
+      "headers": {
+        "X-Powered-By": "(?i)Node\\.js"
+      }
+    },
+    {
+      "name": "Laravel",
+      "category": "Web Framework",
+      "cookies": ["laravel_session", "XSRF-TOKEN"],
+      "implies": ["PHP"]
+    },
+    {
+      "name": "Django",
+      "category": "Web Framework",
+      "cookies": ["csrftoken", "django_language"],
+      "html": ["name=[\"']csrfmiddlewaretoken[\"']"],
+      "implies": ["Python"]
+    },
+    {
+      "name": "Ruby on Rails",
+      "category": "Web Framework",
+      "headers": {
+        "X-Runtime": "^[\\d.]+$",
+        "X-Request-Id": ".+"
+      },
+      "html": ["<meta name=[\"']csrf-param[\"'] content=[\"']authenticity_token[\"']"],
+      "implies": ["Ruby"]
+    },
+    {
+      "name": "Spring Boot",
+      "category": "Web Framework",
+      "headers": {
+        "X-Application-Context": ".+"
+      },
+      "html": ["Whitelabel Error Page"],
+      "implies": ["Java"]
+    },
+    {
+      "name": "Python",
+      "category": "Programming Language",
+      "headers": {
+        "Server": "(?i)(?:Python|Gunicorn|Uvicorn|Werkzeug)(?:/([\\d.]+))?"
+      }
+    },
+    {
+      "name": "Ruby",
+      "category": "Programming Language",
+      "headers": {
+        "Server": "(?i)(?:Phusion Passenger|Puma|Unicorn|WEBrick)(?:/([\\d.]+))?"
+      }
+    },
+    {
+      "name": "WordPress",
+      "category": "CMS",
+      "headers": {
+        "X-Pingback": "/xmlrpc\\.php$",
+        "Link": "rel=\"https://api\\.w\\.org/\""
+      },
+      "metaGenerator": "(?i)^WordPress\\s*([\\d.]+)?",
+      "html": ["/wp-content/(?:themes|plugins)/", "/wp-includes/"],
+      "scripts": ["/wp-includes/js/", "/wp-content/"],
+      "implies": ["PHP"]
+    },
+    {
+      "name": "Drupal",
+      "category": "CMS",
+      "headers": {
+        "X-Drupal-Cache": ".+",
+        "X-Generator": "(?i)Drupal\\s*([\\d.]+)?"
+      },
+      "metaGenerator": "(?i)^Drupal\\s*([\\d.]+)?",
+      "html": ["Drupal\\.settings", "/sites/default/files/"],
+      "implies": ["PHP"]
+    },
+    {
+      "name": "Joomla",
+      "category": "CMS",
+      "metaGenerator": "(?i)^Joomla!\\s*([\\d.]+)?",
+      "html": ["/media/jui/js/", "/components/com_"],
+      "implies": ["PHP"]
+    },
+    {
+      "name": "Shopify",
+      "category": "E-Commerce",
+      "headers": {
+        "X-ShopId": ".+",
+        "X-Sorting-Hat-ShopId": ".+"
+      },
+      "html": ["cdn\\.shopify\\.com", "Shopify\\.theme"],
+      "scripts": ["cdn\\.shopify\\.com"]
+    },
+    {
+      "name": "Magento",
+      "category": "E-Commerce",
+      "cookies": ["PHPSESSID", "mage-cache-sessid"],
+      "html": ["/static/version\\d+/", "Mage\\.Cookies"],
+      "implies": ["PHP"]
+    },
+    {
+      "name": "Ghost",
+      "category": "CMS",
+      "headers": {
+        "X-Ghost-Cache-Status": ".+"
+      },
+      "metaGenerator": "(?i)^Ghost\\s*([\\d.]+)?",
+      "implies": ["Node.js"]
+    },
+    {
+      "name": "Next.js",
+      "category": "Frontend Framework",
+      "headers": {
+        "X-Powered-By": "(?i)^Next\\.js\\s*([\\d.]+)?"
+      },
+      "html": ["id=[\"']__NEXT_DATA__[\"']", "/_next/static/"],
+      "scripts": ["/_next/static/"],
+      "implies": ["React", "Node.js"]
+    },
+    {
+      "name": "Nuxt.js",
+      "category": "Frontend Framework",
+      "html": ["window\\.__NUXT__", "id=[\"']__nuxt[\"']"],
+      "scripts": ["/_nuxt/"],
+      "implies": ["Vue.js", "Node.js"]
+    },
+    {
+      "name": "React",
+      "category": "JavaScript Framework",
+      "html": ["data-reactroot", "data-reactid", "__REACT_DEVTOOLS_GLOBAL_HOOK__"],
+      "scripts": ["react(?:-dom)?(?:\\.production\\.min)?\\.js"]
+    },
+    {
+      "name": "Vue.js",
+      "category": "JavaScript Framework",
+      "html": ["data-v-[a-f0-9]{6,8}", "__VUE__"],
+      "scripts": ["vue(?:\\.runtime)?(?:\\.global)?(?:\\.prod)?\\.js"]
+    },
+    {
+      "name": "Angular",
+      "category": "JavaScript Framework",
+      "html": ["ng-version=[\"']([\\d.]+)[\"']", "<app-root"],
+      "scripts": ["(?:main|polyfills|runtime)\\.[a-f0-9]+\\.js"]
+    },
+    {
+      "name": "Svelte",
+      "category": "JavaScript Framework",
+      "html": ["svelte-[a-z0-9]{6}"],
+      "scripts": ["/_app/immutable/"]
+    },
+    {
+      "name": "jQuery",
+      "category": "JavaScript Library",
+      "scripts": ["jquery(?:[-.]([\\d.]+))?(?:\\.min)?\\.js"]
+    },
+    {
+      "name": "Bootstrap",
+      "category": "UI Framework",
+      "html": ["bootstrap(?:\\.min)?\\.css"],
+      "scripts": ["bootstrap(?:\\.bundle)?(?:\\.min)?\\.js"]
+    },
+    {
+      "name": "Tailwind CSS",
+      "category": "UI Framework",
+      "html": ["--tw-ring-offset-shadow", "--tw-translate-x"]
+    },
+    {
+      "name": "Grafana",
+      "category": "DevOps / Monitoring",
+      "cookies": ["grafana_session"],
+      "html": ["\"appSubUrl\"", "<title>Grafana</title>"]
+    },
+    {
+      "name": "Jenkins",
+      "category": "CI / CD",
+      "headers": {
+        "X-Jenkins": "([\\d.]+)",
+        "X-Hudson": ".+"
+      },
+      "html": ["data-resurl=[\"']/static/"]
+    },
+    {
+      "name": "GitLab",
+      "category": "DevOps / SCM",
+      "cookies": ["_gitlab_session"],
+      "html": ["content=[\"']GitLab[\"']", "gon\\.api_version"]
+    },
+    {
+      "name": "Kibana",
+      "category": "DevOps / Monitoring",
+      "headers": {
+        "kbn-name": ".+",
+        "kbn-version": "([\\d.]+)"
+      },
+      "html": ["kbn-injected-metadata"]
+    },
+    {
+      "name": "Swagger UI",
+      "category": "API Documentation",
+      "html": ["swagger-ui-bundle\\.js", "id=[\"']swagger-ui[\"']"],
+      "scripts": ["swagger-ui-bundle\\.js"]
+    },
+    {
+      "name": "Keycloak",
+      "category": "Identity / SSO",
+      "cookies": ["KEYCLOAK_SESSION", "AUTH_SESSION_ID"],
+      "html": ["/realms/.+/protocol/openid-connect", "kc-login"]
+    },
+    {
+      "name": "Prometheus",
+      "category": "DevOps / Monitoring",
+      "html": ["<title>Prometheus Time Series Collection and Processing Server</title>"]
+    },
+    {
+      "name": "phpMyAdmin",
+      "category": "Database Admin",
+      "cookies": ["phpMyAdmin"],
+      "html": ["<title>phpMyAdmin", "pma_username"],
+      "implies": ["PHP"]
+    }
+  ]
+}
