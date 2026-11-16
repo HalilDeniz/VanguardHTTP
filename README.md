@@ -1,3 +1,5 @@
+<div align="center">
+
 # 🛡️ VanguardHTTP
 
 **High-Performance Cross-Platform HTTP Probing & Deep Fingerprinting Desktop Suite**
@@ -144,7 +146,7 @@ git push origin feature/amazing-fingerprint
 
 Have a suggestion, feature request, or encountered a bug?
 
-* Open an issue on the [GitHub Issues](https://www.google.com/search?q=https://github.com/halildeniz/VanguardHTTP/issues) page with steps to reproduce, your OS version, and relevant logs.
+* Open an issue on the [GitHub Issues](https://github.com/HalilDeniz/VanguardHTTP/blob/main/MIT) page with steps to reproduce, your OS version, and relevant logs.
 
 ## ⚖️ Legal Disclaimer
 
@@ -162,4 +164,4 @@ Have a suggestion, feature request, or encountered a bug?
 
 ## 📄 License
 
-Distributed under the **MIT License**. See [`LICENSE`](https://www.google.com/search?q=LICENSE) for full details.
+Distributed under the **MIT License**. See [`LICENSE`](https://github.com/HalilDeniz/VanguardHTTP/blob/main/MIT) for full details.
