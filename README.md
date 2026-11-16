@@ -22,7 +22,6 @@
 
 Instead of parsing walls of terminal output or chaining multiple CLI scripts manually, VanguardHTTP streams live HTTP probing and deep fingerprinting telemetry directly into a responsive, filterable desktop workspace—compiled into a single standalone binary with minimal RAM overhead.
 
----
 
 ## ✨ Key Features
 
