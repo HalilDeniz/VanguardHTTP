@@ -1,6 +1,3 @@
-<img width="1917" height="1036" alt="vanguardhttp-v1 0 0-1-" src="https://github.com/user-attachments/assets/356aa594-bfb6-4c72-9a5a-1d957e833e48" />
-<div align="center">
-
 # 🛡️ VanguardHTTP
 
 **High-Performance Cross-Platform HTTP Probing & Deep Fingerprinting Desktop Suite**
