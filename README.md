@@ -116,6 +116,108 @@ Output: `build/bin/VanguardHTTP`
 
 ---
 
+### 🏗️ Project Architecture
+
+VanguardHTTP follows a modular Go backend and React/TypeScript frontend architecture powered by Wails v2:
+
+```text
+VanguardHTTP/
+├── main.go                                 # Wails v2 entry point, window options & lifecycle setup
+├── wails.json                              # Wails build, application metadata & frontend config
+├── go.mod                                  # Go 1.22+ module & dependency definitions
+├── go.sum                                  # Dependency checksums
+├── LICENSE                                 # MIT License
+├── README.md                               # Project documentation
+├── SECURITY.md                             # Responsible disclosure & security policy
+│
+├── build/                                  # Platform-specific packaging & icon assets
+│   ├── appicon.png                         # Master application icon
+│   ├── darwin/                             # macOS (.app) Info.plist & .icns assets
+│   ├── linux/                              # Linux desktop integration assets
+│   └── windows/                            # Windows (.exe) manifest & .ico resources
+│
+├── internal/                               # Core Go backend packages
+│   ├── app/
+│   │   └── app.go                          # Bound Wails API methods & real-time EventsEmit bridge
+│   │
+│   ├── models/                             # Data structures & validation DTOs
+│   │   ├── scan_config.go                  # Scan settings, normalization & input validation
+│   │   ├── probe_result.go                 # Single-target reconnaissance output (HTTP/DNS/TLS/Tech)
+│   │   └── stats.go                        # Real-time telemetry metrics (RPS, progress, counters)
+│   │
+│   ├── target/                             # Target parsing & normalization layer
+│   │   └── parser.go                       # CIDR expansion, custom ports & http/https scheme builder
+│   │
+│   ├── engine/                             # High-concurrency probing & network engine
+│   │   ├── engine.go                       # Worker pool, rate limiter, Pause/Resume/Stop & streamer
+│   │   ├── client.go                       # HTTP/SOCKS5 proxy transport, TLS config & redirect tracker
+│   │   └── prober.go                       # Request execution, HTTPS->HTTP fallback, retries & safe body read
+│   │
+│   ├── fingerprint/                        # Modular fingerprinting & analysis engines
+│   │   ├── html.go                         # <title> extraction, word/line counts & UTF-8 body preview
+│   │   ├── tech.go                         # Header, cookie, HTML & script technology detector
+│   │   ├── dns.go                          # Concurrent A, AAAA, CNAME lookup & CDN attribution
+│   │   ├── tls.go                          # X.509 certificate chain, CN, Issuer, expiry & SAN parser
+│   │   ├── favicon.go                      # Favicon fetcher & Shodan-compatible MMH3 hash calculator
+│   │   └── rules/
+│   │       └── fingerprints.json           # Embedded (go:embed) Wappalyzer-style detection ruleset
+│   │
+│   ├── useragent/                          # Request identity management
+│   │   └── pool.go                         # Modern multi-browser User-Agent pool & random selector
+│   │
+│   └── export/                             # Report & data serialization modules
+│       ├── exporter.go                     # Unified export manager & file writer
+│       ├── json.go                         # Structured full JSON report generator
+│       ├── csv.go                          # UTF-8 BOM tabular CSV exporter
+│       ├── txt.go                          # Deduplicated live URLs list exporter
+│       └── html.go                         # Standalone dark-mode interactive HTML security report
+│
+└── frontend/                               # React + TypeScript + Tailwind CSS UI
+    ├── index.html                          # Main HTML entry template
+    ├── package.json                        # Frontend dependencies (lucide-react, tailwindcss, etc.)
+    ├── tsconfig.json                       # TypeScript compiler configuration
+    ├── vite.config.ts                      # Vite bundler configuration
+    ├── tailwind.config.js                  # Dark/Light theme palette & typography settings
+    ├── postcss.config.js                   # PostCSS configuration
+    │
+    ├── wailsjs/                            # Auto-generated Go <-> TypeScript bindings & runtime
+    │   ├── go/                             # Bound Go structs and methods
+    │   └── runtime/                        # Wails event & window runtime APIs
+    │
+    └── src/
+        ├── main.tsx                        # React root mount
+        ├── App.tsx                         # Main 3-pane workspace, filtering, sorting & state orchestrator
+        ├── index.css                       # Tailwind directives & custom scrollbar styles
+        │
+        ├── types/
+        │   └── vanguard.ts                 # TypeScript interfaces matching backend models
+        │
+        ├── hooks/
+        │   ├── useScanStream.ts            # Micro-batched (100ms) real-time event stream listener
+        │   └── useTheme.ts                 # Dark / Light mode toggle & localStorage persistence
+        │
+        └── components/
+            ├── layout/
+            │   ├── Header.tsx              # Top navigation bar, theme switch & import/export triggers
+            │   └── DashboardBar.tsx        # Live telemetry metrics, RPS gauge, progress bar & controls
+            │
+            ├── input/
+            │   └── TargetInputPanel.tsx    # Target input area, drag-and-drop .txt loader & counters
+            │
+            ├── settings/
+            │   └── SettingsDrawer.tsx      # Slide-over drawer for threads, RPS, proxy, ports & headers
+            │
+            ├── results/
+            │   ├── FilterBar.tsx           # Status pills, tech filter, regex search & noise reduction
+            │   └── ResultsTable.tsx        # Sortable & filterable live reconnaissance results table
+            │
+            ├── inspector/
+            │   └── InspectorDrawer.tsx     # Raw request, headers, HTML source, TLS & redirect inspector
+            │
+            └── export/
+                └── ExportModal.tsx         # Modal for exporting all or filtered results (JSON/CSV/TXT/HTML)
+```
+
 ## 🤝 Contributing
 
 Contributions, feature ideas, and new technology fingerprint signatures are welcome!
